@@ -1,0 +1,21 @@
+{
+  "name": "travel-memo-v2-supabase",
+  "private": true,
+  "version": "2.8.7",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 0.0.0.0",
+    "build": "vite build",
+    "preview": "vite preview --host 0.0.0.0",
+    "check": "node --check src/main.js && node --check src/local-db.js && node --check src/supabase-client.js && node --check src/sync.js && node --check src/utils.js && node --check src/pwa.js"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.75.0",
+    "leaflet": "^1.9.4",
+    "vite": "^7.1.12"
+  },
+  "devDependencies": {},
+  "engines": {
+    "node": "20.x"
+  }
+}

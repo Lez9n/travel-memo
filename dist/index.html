@@ -1,0 +1,571 @@
+<!doctype html>
+<html lang="th">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content" />
+    <meta name="theme-color" content="#5eead4" />
+    <meta http-equiv="Cache-Control" content="no-store" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta name="description" content="Travel Memo v2.8.7 - Integrated SVG Icon System" />
+    <meta property="og:site_name" content="Travel Memo" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Travel Memo — Public Travel Story" />
+    <meta property="og:description" content="Read a public, read-only Travel Memo trip story with photos, route memories, and timeline chapters." />
+    <meta property="og:image" content="/icons/icon-512.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Travel Memo — Public Travel Story" />
+    <meta name="twitter:description" content="Read a public, read-only Travel Memo trip story." />
+    <meta name="twitter:image" content="/icons/icon-512.png" />
+    <link rel="manifest" href="/manifest.webmanifest?v=2.8.7" />
+    <link rel="apple-touch-icon" href="/icons/icon-192.png" />
+    <link rel="icon" type="image/svg+xml" href="/icons/app-mark.svg" />
+    <title>Travel Memo v2.8.7</title>
+
+    <script>
+      window.TRAVEL_MEMO_BOOT_VERSION = '2.8.7';
+      window.TRAVEL_MEMO_CACHE_NAME = 'travel-memo-v2-8-7';
+      (async function travelMemoBootGuard(){
+        try {
+          const versionKey = 'travel_memo_boot_version';
+          const currentVersion = window.TRAVEL_MEMO_BOOT_VERSION;
+          const previousVersion = localStorage.getItem(versionKey);
+          if (previousVersion && previousVersion !== currentVersion) {
+            if ('serviceWorker' in navigator) {
+              const registrations = await navigator.serviceWorker.getRegistrations();
+              await Promise.all(registrations.map((registration) => registration.unregister()));
+            }
+            if ('caches' in window) {
+              const keys = await caches.keys();
+              await Promise.all(keys.filter((key) => key.startsWith('travel-memo')).map((key) => caches.delete(key)));
+            }
+            sessionStorage.removeItem('travel_memo_reloaded_for_sw_done');
+          }
+          localStorage.setItem(versionKey, currentVersion);
+        } catch (error) {
+          console.warn('Travel Memo boot cache guard skipped', error);
+        }
+      })();
+
+      window.addEventListener('load', function(){
+        window.setTimeout(function(){
+          var app = document.getElementById('app');
+          var panel = document.getElementById('authPanel');
+          if (app && app.classList.contains('auth-checking') && !window.TRAVEL_MEMO_BOOT_OK) {
+            console.warn('Travel Memo boot watchdog activated');
+            app.classList.remove('auth-checking');
+            app.classList.add('logged-out');
+            if (panel && !panel.innerHTML.trim()) {
+              panel.innerHTML = '<div class="auth-hero-icon"><svg class="tm-icon" aria-hidden="true"><use href="/icons/travel-memo/travel-memo-icons.sprite.svg#tm-app-mark"></use></svg></div><h2>เข้าสู่พื้นที่ส่วนตัวของคุณ</h2><p>ระบบโหลดนานเกินไป กดปุ่มด้านล่างเพื่อรีโหลดแบบล้างแคช</p><button class="google-only-button" type="button" onclick="location.href=\"/reset-cache.html\"">ล้างแคชแล้วโหลดใหม่</button>';
+            }
+          }
+        }, 6500);
+      });
+    </script>
+    <script type="module" crossorigin src="/assets/index-BxwHE7MX.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-BQAM9t7H.css">
+  </head>
+  <body>
+    <div id="app" class="app-shell auth-checking" data-app-version="2.8.7">
+      <div id="bootSplash" class="boot-splash"><div class="boot-orb"><svg class="tm-icon boot-icon" aria-hidden="true"><use href="/icons/travel-memo/travel-memo-icons.sprite.svg#tm-plane"></use></svg> </div><strong>กำลังเปิด Travel Memo</strong><span>ตรวจสอบ session และโหลดพื้นที่ส่วนตัว...</span></div>
+      <header class="app-header">
+        <div>
+          <p class="eyebrow">Travel Memo v2.8.7</p>
+          <h1 id="screenTitle">บันทึกการเดินทาง</h1>
+        </div>
+        <div class="status-stack" aria-live="polite">
+          <span id="networkStatus" class="status-pill">ตรวจสอบเครือข่าย...</span>
+          <button id="installButton" class="ghost-button compact hidden" type="button">ติดตั้งแอป</button>
+        </div>
+      </header>
+
+      <main class="app-main">
+        <section id="homeScreen" class="screen active" data-title="บันทึกการเดินทาง">
+          <article class="hero-card">
+            <div>
+              <p class="eyebrow">Local-first + Cloud Sync</p>
+              <h2>บันทึกง่าย อุ่นใจแม้ออฟไลน์</h2>
+              <p>เก็บ Memo, Trip, รูปภาพ และพิกัดไว้ในเครื่องก่อน พร้อมย่อรูปทำ thumbnail และซิงก์ขึ้น Supabase อัตโนมัติเมื่อออนไลน์</p>
+            </div>
+            <button class="primary-button large" type="button" data-open="add"><svg class="tm-icon" aria-hidden="true"><use href="/icons/travel-memo/travel-memo-icons.sprite.svg#tm-add-memo"></use></svg><span>เช็กอิน / เพิ่ม Memo</span></button>
+          </article>
+
+          <section class="auth-card" id="authPanel"></section>
+
+          <section class="section-card sync-card compact-sync-card private-only sync-card-runtime-only" aria-label="สถานะซิงก์" hidden>
+            <p id="syncStatusText" class="sr-only">กำลังโหลดข้อมูล...</p>
+            <button id="syncNowButton" class="hidden" type="button" aria-hidden="true" tabindex="-1">ซิงก์ตอนนี้</button>
+            <span id="autoSyncStatus" class="chip sync-chip hidden">Auto Sync พร้อม</span>
+            <div class="progress-wrap"><div id="syncProgress" class="progress-bar"></div></div>
+          </section>
+
+          <section class="summary-grid private-only" aria-label="สถิติ Travel Memo">
+            <article>
+              <div class="stat-icon"><svg class="tm-icon" aria-hidden="true"><use href="/icons/travel-memo/travel-memo-icons.sprite.svg#tm-memo"></use></svg></div>
+              <span id="statMemo">0</span><small>Memo</small>
+            </article>
+            <article>
+              <div class="stat-icon"><svg class="tm-icon" aria-hidden="true"><use href="/icons/travel-memo/travel-memo-icons.sprite.svg#tm-trips"></use></svg></div>
+              <span id="statTrip">0</span><small>Trip</small>
+            </article>
+            <article>
+              <div class="stat-icon"><svg class="tm-icon" aria-hidden="true"><use href="/icons/travel-memo/travel-memo-icons.sprite.svg#tm-photo"></use></svg></div>
+              <span id="statPhoto">0</span><small>รูปภาพ</small>
+            </article>
+            <article>
+              <div class="stat-icon"><svg class="tm-icon" aria-hidden="true"><use href="/icons/travel-memo/travel-memo-icons.sprite.svg#tm-queue"></use></svg></div>
+              <span id="statQueue">0</span><small>รอซิงก์</small>
+            </article>
+          </section>
+
+          <section class="section-card private-only">
+            <div class="section-heading">
+              <div>
+                <h2><svg class="tm-icon" aria-hidden="true"><use href="/icons/travel-memo/travel-memo-icons.sprite.svg#tm-memo"></use></svg><span>Memo ล่าสุด</span></h2>
+                <p>แตะเพื่อดูรายละเอียด แก้ไข หรือแชร์</p>
+              </div>
+              <button class="ghost-button" type="button" data-open="timeline"><svg class="tm-icon" aria-hidden="true"><use href="/icons/travel-memo/travel-memo-icons.sprite.svg#tm-timeline"></use></svg><span>ดู Timeline</span></button>
+            </div>
+            <div id="latestMemos" class="card-list"></div>
+          </section>
+
+          <section class="section-card private-only">
+            <div class="section-heading">
+              <div>
+                <h2><svg class="tm-icon" aria-hidden="true"><use href="/icons/travel-memo/travel-memo-icons.sprite.svg#tm-trips"></use></svg><span>Trip ล่าสุด</span></h2>
+                <p>จัดกลุ่ม Memo ตามทริป</p>
+              </div>
+              <button class="ghost-button" type="button" data-open="trips"><svg class="tm-icon" aria-hidden="true"><use href="/icons/travel-memo/travel-memo-icons.sprite.svg#tm-trips"></use></svg><span>จัดการ Trip</span></button>
+            </div>
+            <div id="homeTrips" class="trip-strip"></div>
+          </section>
+        </section>
+
+        <section id="addScreen" class="screen private-screen" data-title="Quick Capture">
+          <form id="memoForm" class="capture-form">
+            <input type="hidden" id="memoId" />
+            <section class="section-card camera-card">
+              <div class="section-heading">
+                <div>
+                  <h2><svg class="tm-icon" aria-hidden="true"><use href="/icons/travel-memo/travel-memo-icons.sprite.svg#tm-gallery"></use></svg><span>รูปภาพ</span></h2>
+                  <p>ถ่ายรูปก่อน แล้วเติมเรื่องราวต่อได้</p>
+                </div>
+                <span id="selectedPhotoCount" class="chip">0 รูป</span>
+              </div>
+              <div class="camera-actions">
+                <label class="capture-button">
+                  <input id="cameraInput" type="file" accept="image/*" capture="environment" multiple />
+                  <svg class="tm-icon" aria-hidden="true"><use href="/icons/travel-memo/travel-memo-icons.sprite.svg#tm-camera"></use></svg><span>ถ่ายรูป</span>
+                </label>
+                <label class="capture-button secondary">
+                  <input id="galleryInput" type="file" accept="image/*" multiple />
+                  <svg class="tm-icon" aria-hidden="true"><use href="/icons/travel-memo/travel-memo-icons.sprite.svg#tm-gallery"></use></svg><span>เลือกรูป</span>
+                </label>
+              </div>
+              <div id="photoUploadStatus" class="photo-upload-status hidden" aria-live="polite"></div>
+              <div id="photoPreview" class="photo-preview"></div>
+            </section>
+
+            <section class="section-card form-grid">
+              <label>
+                ชื่อ Memo
+                <input id="memoTitle" type="text" placeholder="เช่น เช็กอินที่คาเฟ่ริมแม่น้ำ" />
+              </label>
+              <label>
+                วันที่เดินทาง
+                <input id="visitedAt" type="datetime-local" required />
+              </label>
+              <label>
+                Trip
+                <select id="memoTrip"></select>
+              </label>
+              <label>
+                หรือสร้าง Trip ใหม่
+                <input id="newTripName" type="text" placeholder="เช่น Japan Spring 2026" />
+              </label>
+              <label>
+                สถานที่
+                <input id="placeName" type="text" placeholder="ชื่อสถานที่ / ร้าน / จุดเช็กอิน" />
+              </label>
+              <label>
+                เมือง
+                <input id="city" type="text" placeholder="เมือง" />
+              </label>
+              <label>
+                จังหวัด / รัฐ
+                <input id="region" type="text" placeholder="จังหวัด / รัฐ" />
+              </label>
+              <label>
+                ประเทศ
+                <input id="country" type="text" placeholder="ประเทศ" />
+              </label>
+              <label class="span-2">
+                Highlight / สรุปสั้น
+                <textarea id="note" rows="3" placeholder="สรุปสั้น ๆ 1-2 บรรทัด เช่น วิวสวยมาก ร้านดี ต้องกลับมาอีก"></textarea>
+              </label>
+              <div class="span-2 two-col compact-fields">
+                <label>
+                  คะแนน
+                  <select id="rating" class="sr-only-select">
+                    <option value="5">★★★★★ ประทับใจมาก</option>
+                    <option value="4">★★★★ ดีมาก</option>
+                    <option value="3">★★★ ปานกลาง</option>
+                    <option value="2">★★ พอใช้</option>
+                    <option value="1">★ ไม่ค่อยประทับใจ</option>
+                  </select>
+                  <div id="ratingPicker" class="rating-picker" aria-label="เลือกคะแนนความประทับใจ"></div>
+                </label>
+                <label>
+                  Mood
+                  <select id="mood" class="sr-only-select">
+                    <option value="happy">สุขใจ</option>
+                    <option value="calm">สงบ</option>
+                    <option value="excited">ตื่นเต้น</option>
+                    <option value="tired">เหนื่อยแต่คุ้ม</option>
+                    <option value="surprised">เซอร์ไพรส์</option>
+                    <option value="adventure">ผจญภัย</option>
+                    <option value="romantic">โรแมนติก</option>
+                    <option value="family">ครอบครัว</option>
+                    <option value="nature">ธรรมชาติ</option>
+                    <option value="food">อาหาร</option>
+                  </select>
+                  <div id="moodPicker" class="mood-picker" aria-label="เลือก Mood"></div>
+                </label>
+              </div>
+              <details class="span-2 advanced-box">
+                <summary>Story / บันทึกการเดินทาง</summary>
+                <label>
+                  เรื่องเล่า / บันทึกการเดินทาง
+                  <textarea id="diary" rows="6" placeholder="เล่าเรื่องราวของวันนี้ ความรู้สึก สิ่งที่เจอ หรือรายละเอียดที่อยากเก็บไว้"></textarea>
+                </label>
+                <label>
+                  Tags
+                  <input id="tags" type="hidden" />
+                  <div id="tagEditor" class="tag-editor" aria-live="polite"></div>
+                  <input id="tagEntry" type="text" placeholder="พิมพ์ tag แล้วกด Enter เช่น cafe, family, mountain" autocomplete="off" />
+                  <div id="tagSuggestions" class="tag-suggestions" aria-label="Tag suggestions"></div>
+                  <small class="field-help">ใส่ได้หลาย tag พร้อมกัน คั่นด้วย comma หรือ space และลบได้จากชิปด้านบน</small>
+                </label>
+                <div class="two-col">
+                  <label>
+                    Latitude
+                    <input id="latitude" type="number" step="any" placeholder="13.7563" />
+                  </label>
+                  <label>
+                    Longitude
+                    <input id="longitude" type="number" step="any" placeholder="100.5018" />
+                  </label>
+                </div>
+              </details>
+              <div class="span-2 form-actions sticky-actions">
+                <button id="locationButton" class="secondary-button" type="button"><svg class="tm-icon" aria-hidden="true"><use href="/icons/travel-memo/travel-memo-icons.sprite.svg#tm-location"></use></svg><span>ใช้ตำแหน่งปัจจุบัน</span></button>
+                <button id="mapPickerButton" class="ghost-button" type="button" data-open="map"><svg class="tm-icon" aria-hidden="true"><use href="/icons/travel-memo/travel-memo-icons.sprite.svg#tm-map"></use></svg><span>เลือกจากแผนที่</span></button>
+                <button id="saveMemoButton" class="primary-button" type="submit"><svg class="tm-icon" aria-hidden="true"><use href="/icons/travel-memo/travel-memo-icons.sprite.svg#tm-memo"></use></svg><span>บันทึก Memo</span></button>
+                <button id="cancelEditButton" class="ghost-button hidden" type="button"><svg class="tm-icon" aria-hidden="true"><use href="/icons/travel-memo/travel-memo-icons.sprite.svg#tm-edit"></use></svg><span>ยกเลิกแก้ไข</span></button>
+              </div>
+            </section>
+          </form>
+        </section>
+
+        <section id="tripsScreen" class="screen private-screen" data-title="Trips">
+          <section class="section-card">
+            <div class="section-heading">
+              <div>
+                <h2><svg class="tm-icon" aria-hidden="true"><use href="/icons/travel-memo/travel-memo-icons.sprite.svg#tm-trips"></use></svg><span>สร้าง / แก้ไข Trip</span></h2>
+                <p>ใช้จัดกลุ่ม Memo เป็นทริปและดู Timeline ตามวัน</p>
+              </div>
+            </div>
+            <form id="tripForm" class="form-grid">
+              <input id="tripId" type="hidden" />
+              <label>
+                ชื่อ Trip
+                <input id="tripTitle" type="text" required placeholder="เช่น Chiang Mai Weekend" />
+              </label>
+              <label>
+                สถานะ
+                <select id="tripStatus">
+                  <option value="planned">กำลังวางแผน</option>
+                  <option value="active">กำลังเดินทาง</option>
+                  <option value="done">จบทริปแล้ว</option>
+                </select>
+              </label>
+              <label>
+                วันที่เริ่ม
+                <input id="tripStart" type="date" />
+              </label>
+              <label>
+                วันที่จบ
+                <input id="tripEnd" type="date" />
+              </label>
+              <label>
+                ประเทศหลัก
+                <input id="tripCountry" type="text" />
+              </label>
+              <label>
+                เมืองหลัก
+                <input id="tripCity" type="text" />
+              </label>
+              <label class="span-2">
+                รายละเอียด
+                <textarea id="tripDescription" rows="3" placeholder="บันทึกภาพรวมของทริป"></textarea>
+              </label>
+              <div class="span-2 form-actions">
+                <button class="primary-button" type="submit"><svg class="tm-icon" aria-hidden="true"><use href="/icons/travel-memo/travel-memo-icons.sprite.svg#tm-trips"></use></svg><span>บันทึก Trip</span></button>
+                <button id="resetTripButton" class="ghost-button" type="button"><svg class="tm-icon" aria-hidden="true"><use href="/icons/travel-memo/travel-memo-icons.sprite.svg#tm-edit"></use></svg><span>ล้างฟอร์ม</span></button>
+              </div>
+            </form>
+          </section>
+          <section class="section-card">
+            <div class="section-heading">
+              <div>
+                <h2><svg class="tm-icon" aria-hidden="true"><use href="/icons/travel-memo/travel-memo-icons.sprite.svg#tm-trips"></use></svg><span>Trip ทั้งหมด</span></h2>
+                <p>เลือกดู Timeline หรือเพิ่ม Memo เข้าทริป</p>
+              </div>
+              <input id="tripSearch" class="search-input" type="search" placeholder="ค้นหา Trip" />
+            </div>
+            <div id="tripList" class="card-list"></div>
+          </section>
+        </section>
+
+        <section id="timelineScreen" class="screen private-screen" data-title="Story Timeline">
+          <section id="timelineHero" class="timeline-story-hero section-card">
+            <div class="timeline-hero-copy">
+              <p class="eyebrow">Travel Story Timeline</p>
+              <h2>เล่าเรื่องการเดินทางเป็นลำดับวัน</h2>
+              <p>เลือก Trip แล้วอ่าน Memo ต่อเนื่องเหมือนไดอารี่ท่องเที่ยว พร้อมรูปเด่น พิกัด และช่วงเวลาของแต่ละวัน</p>
+            </div>
+            <div class="timeline-hero-stats" id="timelineHeroStats"></div>
+          </section>
+
+          <section class="section-card timeline-tools story-timeline-tools">
+            <label>
+              เลือก Trip
+              <select id="timelineTripFilter"></select>
+            </label>
+            <label class="timeline-search-label">
+              ค้นหา Story
+              <input id="memoSearch" type="search" placeholder="ค้นหาเมือง สถานที่ เรื่องเล่า แท็ก หรือ caption รูป" autocomplete="off" />
+            </label>
+            <div class="timeline-filter-chips" id="timelineFilterChips" aria-label="ตัวกรอง Story Timeline">
+              <button class="story-filter-chip active" type="button" data-timeline-filter="all"><svg class="tm-icon" aria-hidden="true"><use href="/icons/travel-memo/travel-memo-icons.sprite.svg#tm-timeline"></use></svg><span>ทั้งหมด</span></button>
+              <button class="story-filter-chip" type="button" data-timeline-filter="photos"><svg class="tm-icon" aria-hidden="true"><use href="/icons/travel-memo/travel-memo-icons.sprite.svg#tm-photo"></use></svg><span>มีรูป</span></button>
+              <button class="story-filter-chip" type="button" data-timeline-filter="places"><svg class="tm-icon" aria-hidden="true"><use href="/icons/travel-memo/travel-memo-icons.sprite.svg#tm-map"></use></svg><span>มีพิกัด</span></button>
+              <button class="story-filter-chip" type="button" data-timeline-filter="notes"><svg class="tm-icon" aria-hidden="true"><use href="/icons/travel-memo/travel-memo-icons.sprite.svg#tm-read"></use></svg><span>มีเรื่องเล่า</span></button>
+              <button class="story-filter-chip" type="button" data-timeline-filter="captions"><svg class="tm-icon" aria-hidden="true"><use href="/icons/travel-memo/travel-memo-icons.sprite.svg#tm-photo"></use></svg><span>มี Caption</span></button>
+              <button class="story-filter-chip" type="button" data-timeline-filter="own"><svg class="tm-icon" aria-hidden="true"><use href="/icons/travel-memo/travel-memo-icons.sprite.svg#tm-user"></use></svg><span>ของฉัน</span></button>
+              <button class="story-filter-chip" type="button" data-timeline-filter="shared"><svg class="tm-icon" aria-hidden="true"><use href="/icons/travel-memo/travel-memo-icons.sprite.svg#tm-group"></use></svg><span>Shared</span></button>
+              <button class="story-filter-chip" type="button" data-timeline-filter="pending"><svg class="tm-icon" aria-hidden="true"><use href="/icons/travel-memo/travel-memo-icons.sprite.svg#tm-sync"></use></svg><span>Pending</span></button>
+            </div>
+            <details id="timelineAdvancedPanel" class="timeline-advanced-panel">
+              <summary><svg class="tm-icon" aria-hidden="true"><use href="/icons/travel-memo/travel-memo-icons.sprite.svg#tm-settings"></use></svg><span>ตัวกรองละเอียด</span></summary>
+              <div class="timeline-advanced-grid">
+                <label>วันที่เริ่ม<input id="timelineDateFrom" type="date" /></label>
+                <label>วันที่สิ้นสุด<input id="timelineDateTo" type="date" /></label>
+                <label>ประเทศ<input id="timelineCountryFilter" type="search" placeholder="ประเทศ" autocomplete="off" /></label>
+                <label>เมือง<input id="timelineCityFilter" type="search" placeholder="เมือง" autocomplete="off" /></label>
+                <label>Tag<input id="timelineTagFilter" type="search" placeholder="เช่น cafe / family" autocomplete="off" /></label>
+                <label>Mood
+                  <select id="timelineMoodFilter">
+                    <option value="">ทุก Mood</option>
+                    <option value="happy">สุขใจ</option>
+                    <option value="calm">สงบ</option>
+                    <option value="excited">ตื่นเต้น</option>
+                    <option value="tired">เหนื่อยแต่คุ้ม</option>
+                    <option value="surprised">เซอร์ไพรส์</option>
+                    <option value="adventure">ผจญภัย</option>
+                    <option value="romantic">โรแมนติก</option>
+                    <option value="family">ครอบครัว</option>
+                    <option value="nature">ธรรมชาติ</option>
+                    <option value="food">อาหาร</option>
+                  </select>
+                </label>
+                <label>Rating
+                  <select id="timelineRatingFilter">
+                    <option value="">ทุกคะแนน</option>
+                    <option value="5">5 ดาว</option>
+                    <option value="4">4 ดาวขึ้นไป</option>
+                    <option value="3">3 ดาวขึ้นไป</option>
+                    <option value="2">2 ดาวขึ้นไป</option>
+                    <option value="1">1 ดาวขึ้นไป</option>
+                  </select>
+                </label>
+                <label>Sync
+                  <select id="timelineSyncFilter">
+                    <option value="">ทุกสถานะ</option>
+                    <option value="synced">Synced</option>
+                    <option value="pending">Pending</option>
+                    <option value="local">Local</option>
+                    <option value="failed">Failed</option>
+                  </select>
+                </label>
+                <label>Owner
+                  <select id="timelineOwnerFilter">
+                    <option value="">ทั้งหมด</option>
+                    <option value="own">ของฉัน</option>
+                    <option value="shared">Shared</option>
+                  </select>
+                </label>
+              </div>
+            </details>
+            <div id="timelineSearchSummary" class="timeline-search-summary" aria-live="polite"></div>
+            <div id="timelineTagMoodOverview" class="timeline-tag-mood-overview" aria-live="polite"></div>
+          </section>
+          <section id="timelineList" class="timeline-list story-timeline-list"></section>
+        </section>
+
+        <section id="mapScreen" class="screen private-screen" data-title="Map Experience">
+          <section class="section-card map-experience-hero">
+            <div>
+              <p class="eyebrow">Travel Map</p>
+              <h2><svg class="tm-icon" aria-hidden="true"><use href="/icons/travel-memo/travel-memo-icons.sprite.svg#tm-map"></use></svg><span>ดูความทรงจำบนแผนที่</span></h2>
+              <p>ย้อนดู Memo ตามพิกัดจริง กรองตาม Trip และเปิดเรื่องเล่าจากหมุดบนแผนที่ได้ทันที</p>
+            </div>
+          </section>
+          <section class="section-card map-tools map-experience-tools">
+            <label>
+              Trip
+              <select id="mapTripFilter"></select>
+            </label>
+            <label>
+              ค้นหาบนแผนที่
+              <input id="mapSearchInput" type="search" placeholder="ชื่อ Memo, สถานที่, เมือง, tag, caption" />
+            </label>
+            <label>
+              แสดงผล
+              <select id="mapScopeFilter">
+                <option value="all">ทั้งหมด</option>
+                <option value="own">ของฉัน</option>
+                <option value="shared">Shared</option>
+                <option value="photo">มีรูป</option>
+              </select>
+            </label>
+            <label class="map-route-toggle">
+              <input id="mapRouteToggle" type="checkbox" checked />
+              <span>Route line เมื่อเลือก Trip</span>
+            </label>
+          </section>
+          <section class="map-experience-layout">
+            <div class="map-panel-main">
+              <div id="map" class="map-canvas map-experience-canvas" role="region" aria-label="แผนที่ Travel Memo"></div>
+              <p class="muted map-note">แตะแผนที่เพื่อเลือกพิกัดสำหรับ Memo ใหม่ หรือกดหมุดเพื่อเปิด Memo Reading Mode</p>
+            </div>
+            <aside class="map-panel-side">
+              <div id="mapSummaryPanel" class="map-summary-panel" aria-live="polite"></div>
+              <div id="mapReplayPanel" class="map-replay-panel" aria-live="polite">
+                <div class="map-replay-head">
+                  <div>
+                    <strong>Route Replay</strong>
+                    <small id="mapReplayStatus">เลือก Trip ที่มีอย่างน้อย 2 จุดเพื่อเล่นเส้นทาง</small>
+                  </div>
+                </div>
+                <div class="map-replay-controls">
+                  <button id="mapReplayPrevButton" class="ghost-button compact" type="button" data-map-action="replay-prev" disabled>ก่อนหน้า</button>
+                  <button id="mapReplayPlayButton" class="primary-button compact" type="button" data-map-action="replay-play" disabled>เล่น</button>
+                  <button id="mapReplayNextButton" class="ghost-button compact" type="button" data-map-action="replay-next" disabled>ถัดไป</button>
+                  <button id="mapReplayResetButton" class="ghost-button compact" type="button" data-map-action="replay-reset" disabled>เริ่มใหม่</button>
+                </div>
+              </div>
+              <div id="mapMemoList" class="map-memo-list" aria-live="polite"></div>
+            </aside>
+          </section>
+        </section>
+
+        <section id="settingsScreen" class="screen private-screen" data-title="Settings">
+          <section class="section-card">
+            <div class="section-heading">
+              <div>
+                <h2><svg class="tm-icon" aria-hidden="true"><use href="/icons/travel-memo/travel-memo-icons.sprite.svg#tm-cloud-sync"></use></svg><span>Supabase / Cloud Sync</span></h2>
+                <p id="supabaseConfigStatus">ตรวจสอบค่าเชื่อมต่อ...</p>
+              </div>
+            </div>
+            <div class="settings-grid">
+              <button id="pullCloudButton" class="secondary-button" type="button"><svg class="tm-icon" aria-hidden="true"><use href="/icons/travel-memo/travel-memo-icons.sprite.svg#tm-cloud-sync"></use></svg><span>ดึงข้อมูลจาก Cloud</span></button>
+              <button id="syncAllButton" class="primary-button" type="button"><svg class="tm-icon" aria-hidden="true"><use href="/icons/travel-memo/travel-memo-icons.sprite.svg#tm-sync"></use></svg><span>ซิงก์ข้อมูลทั้งหมด</span></button>
+              <button id="makePersistentButton" class="ghost-button" type="button"><svg class="tm-icon" aria-hidden="true"><use href="/icons/travel-memo/travel-memo-icons.sprite.svg#tm-storage"></use></svg><span>ขอสิทธิ์เก็บข้อมูลถาวร</span></button>
+              <button id="openAdminButton" class="ghost-button hidden" type="button" data-open="admin"><svg class="tm-icon" aria-hidden="true"><use href="/icons/travel-memo/travel-memo-icons.sprite.svg#tm-admin"></use></svg><span>เปิด Admin</span></button>
+            </div>
+          </section>
+
+          <section class="section-card">
+            <div class="section-heading">
+              <div>
+                <h2><svg class="tm-icon" aria-hidden="true"><use href="/icons/travel-memo/travel-memo-icons.sprite.svg#tm-backup"></use></svg><span>สำรอง / นำเข้า</span></h2>
+                <p>ใช้ JSON backup ควบคู่กับ cloud sync เพื่อความปลอดภัย</p>
+              </div>
+            </div>
+            <div class="settings-grid">
+              <button id="exportButton" class="secondary-button" type="button"><svg class="tm-icon" aria-hidden="true"><use href="/icons/travel-memo/travel-memo-icons.sprite.svg#tm-backup"></use></svg><span>ส่งออก JSON</span></button>
+              <label class="ghost-button file-button" title="นำเข้าข้อมูลจากไฟล์ JSON backup">
+                <svg class="tm-icon" aria-hidden="true"><use href="/icons/travel-memo/travel-memo-icons.sprite.svg#tm-import-json"></use></svg><span>นำเข้า JSON</span>
+                <input id="importInput" type="file" accept="application/json" />
+              </label>
+              <button id="migrateLegacyButton" class="ghost-button" type="button"><svg class="tm-icon" aria-hidden="true"><use href="/icons/travel-memo/travel-memo-icons.sprite.svg#tm-route"></use></svg><span>ย้ายข้อมูลจาก v1.2 localStorage</span></button>
+              <button id="clearLocalButton" class="danger-button" type="button"><svg class="tm-icon" aria-hidden="true"><use href="/icons/travel-memo/travel-memo-icons.sprite.svg#tm-trash"></use></svg><span>ล้างข้อมูลในเครื่อง</span></button>
+            </div>
+          </section>
+
+          <section class="section-card">
+            <h2><svg class="tm-icon" aria-hidden="true"><use href="/icons/travel-memo/travel-memo-icons.sprite.svg#tm-storage"></use></svg><span>พื้นที่จัดเก็บในเครื่อง</span></h2>
+            <p id="storageEstimate" class="muted">กำลังประเมิน...</p>
+          </section>
+
+          <section class="section-card">
+            <div class="section-heading">
+              <div>
+                <h2><svg class="tm-icon" aria-hidden="true"><use href="/icons/travel-memo/travel-memo-icons.sprite.svg#tm-queue"></use></svg><span>ตัวจัดการคิวซิงก์</span></h2>
+                <p>ดูรายการที่ยังไม่ซิงก์ แก้รายการที่ล้มเหลว และบังคับซิงก์ใหม่ได้จากตรงนี้</p>
+              </div>
+            </div>
+            <div class="settings-grid">
+              <button id="queueRetryButton" class="primary-button" type="button"><svg class="tm-icon" aria-hidden="true"><use href="/icons/travel-memo/travel-memo-icons.sprite.svg#tm-sync"></use></svg><span>ลองซิงก์คิวอีกครั้ง</span></button>
+              <button id="queueResetFailedButton" class="secondary-button" type="button"><svg class="tm-icon" aria-hidden="true"><use href="/icons/travel-memo/travel-memo-icons.sprite.svg#tm-queue"></use></svg><span>รีเซ็ตคิวที่ล้มเหลว</span></button>
+              <button id="queueClearFailedButton" class="ghost-button" type="button"><svg class="tm-icon" aria-hidden="true"><use href="/icons/travel-memo/travel-memo-icons.sprite.svg#tm-trash"></use></svg><span>ล้างคิวที่ล้มเหลว</span></button>
+            </div>
+            <div id="queuePanel" class="queue-panel muted">กำลังโหลดคิว...</div>
+          </section>
+
+          <section class="section-card">
+            <div class="section-heading">
+              <div>
+                <h2><svg class="tm-icon" aria-hidden="true"><use href="/icons/travel-memo/travel-memo-icons.sprite.svg#tm-diagnostics"></use></svg><span>ตรวจระบบ / แก้ปัญหา</span></h2>
+                <p>ใช้ดูว่าติดที่ Login, Supabase, Queue, Storage หรือ Cache ของ PWA</p>
+              </div>
+            </div>
+            <div class="settings-grid">
+              <button id="diagnosticsButton" class="secondary-button" type="button"><svg class="tm-icon" aria-hidden="true"><use href="/icons/travel-memo/travel-memo-icons.sprite.svg#tm-diagnostics"></use></svg><span>ตรวจสถานะระบบ</span></button>
+              <button id="clearCacheButton" class="ghost-button" type="button"><svg class="tm-icon" aria-hidden="true"><use href="/icons/travel-memo/travel-memo-icons.sprite.svg#tm-sync"></use></svg><span>ล้าง Cache แอปแล้วโหลดใหม่</span></button>
+            </div>
+            <div id="diagnosticsPanel" class="diagnostics-panel muted">ยังไม่ได้ตรวจ</div>
+          </section>
+        </section>
+
+        <section id="adminScreen" class="screen private-screen" data-title="Admin">
+          <section class="section-card">
+            <div class="section-heading">
+              <div>
+                <h2><svg class="tm-icon" aria-hidden="true"><use href="/icons/travel-memo/travel-memo-icons.sprite.svg#tm-admin"></use></svg><span>Admin Dashboard</span></h2>
+                <p>สำหรับผู้ใช้ role = admin ใน Supabase</p>
+              </div>
+              <button id="refreshAdminButton" class="secondary-button" type="button"><svg class="tm-icon" aria-hidden="true"><use href="/icons/travel-memo/travel-memo-icons.sprite.svg#tm-admin"></use></svg><span>รีเฟรช</span></button>
+            </div>
+            <div id="adminContent" class="admin-grid"></div>
+          </section>
+        </section>
+      </main>
+
+      <nav class="bottom-nav private-only" aria-label="เมนูหลัก">
+        <button class="nav-item active" type="button" data-open="home"><svg class="tm-icon nav-icon" aria-hidden="true"><use href="/icons/travel-memo/travel-memo-icons.sprite.svg#tm-home"></use></svg><small>Home</small></button>
+        <button class="nav-item" type="button" data-open="trips"><svg class="tm-icon nav-icon" aria-hidden="true"><use href="/icons/travel-memo/travel-memo-icons.sprite.svg#tm-trips"></use></svg><small>Trips</small></button>
+        <button class="nav-item primary" type="button" data-open="add"><svg class="tm-icon nav-icon" aria-hidden="true"><use href="/icons/travel-memo/travel-memo-icons.sprite.svg#tm-add-memo"></use></svg><small>Add</small></button>
+        <button class="nav-item" type="button" data-open="timeline"><svg class="tm-icon nav-icon" aria-hidden="true"><use href="/icons/travel-memo/travel-memo-icons.sprite.svg#tm-timeline"></use></svg><small>Timeline</small></button>
+        <button class="nav-item" type="button" data-open="settings"><svg class="tm-icon nav-icon" aria-hidden="true"><use href="/icons/travel-memo/travel-memo-icons.sprite.svg#tm-settings"></use></svg><small>Settings</small></button>
+      </nav>
+
+      <div id="sheetBackdrop" class="sheet-backdrop hidden"></div>
+      <aside id="detailSheet" class="detail-sheet" aria-hidden="true">
+        <div class="sheet-handle"></div>
+        <div id="detailSheetContent"></div>
+      </aside>
+      <div id="toast" class="toast notice-popup" role="alert" aria-live="assertive"></div>
+    </div>
+  </body>
+</html>
