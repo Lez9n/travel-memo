@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+  <symbol id="tm-add-memo" viewBox="0 0 24 24">
+<path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" d="M6.5 4.5h8.2L18.5 8v11.5h-12z"/>
+  <path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" d="M14.5 4.7V8h3.6M9 13h6M12 10v6"/>
+  <path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" d="M9 18h6" opacity=".65"/>
+  </symbol>
+  <symbol id="tm-admin" viewBox="0 0 24 24">
+<path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" d="M12 3.5 18.5 6v5.1c0 4.4-2.6 7.7-6.5 9.4-3.9-1.7-6.5-5-6.5-9.4V6Z"/>
+  <path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" d="M9.2 12.1 11 13.9l3.9-4.1"/>
+  </symbol>
+  <symbol id="tm-app-mark" viewBox="0 0 64 64">
+<defs>
+    <linearGradient id="g" x1="10" y1="6" x2="54" y2="58" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#14B8A6"/>
+      <stop offset="1" stop-color="#2563EB"/>
+    </linearGradient>
+  </defs>
+  <rect x="6" y="6" width="52" height="52" rx="16" fill="url(#g)"/>
+  <path d="M20 43V19.5a3.5 3.5 0 0 1 3.5-3.5h17A3.5 3.5 0 0 1 44 19.5V43l-5.5-3-6.5 3-6.5-3L20 43Z" fill="#fff" opacity=".94"/>
+  <path d="M25 24h14M25 30h10" stroke="#0F766E" stroke-width="2.3" stroke-linecap="round"/>
+  <path d="M33.8 17.6 47 11l-5.1 14.5-2.8-5.1-5.3-2.8Z" fill="#F59E0B" stroke="#fff" stroke-width="1.6" stroke-linejoin="round"/>
+  </symbol>
+  <symbol id="tm-backup" viewBox="0 0 24 24">
+<path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" d="M5 5.5h10.5L19 9v9.5H5Z"/>
+  <path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" d="M8 5.5v5h7v-5"/>
+  <path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" d="M9 18.5v-4h6v4M11 8h2"/>
+  </symbol>
+  <symbol id="tm-calendar" viewBox="0 0 24 24">
+<path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" d="M5.5 6.5h13A2.5 2.5 0 0 1 21 9v9.5a2.5 2.5 0 0 1-2.5 2.5h-13A2.5 2.5 0 0 1 3 18.5V9a2.5 2.5 0 0 1 2.5-2.5Z"/>
+  <path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" d="M7.5 3.8v4.1M16.5 3.8v4.1M3 10.5h18"/>
+  </symbol>
+  <symbol id="tm-camera" viewBox="0 0 24 24">
+<path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" d="M4.5 8.2A2.2 2.2 0 0 1 6.7 6h2l1.3-2h4l1.3 2h2A2.2 2.2 0 0 1 19.5 8.2v9.1a2.2 2.2 0 0 1-2.2 2.2H6.7a2.2 2.2 0 0 1-2.2-2.2Z"/>
+  <circle cx="12" cy="13" r="3.4" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+  <path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" d="M17 9h.1"/>
+  </symbol>
+  <symbol id="tm-check-in" viewBox="0 0 24 24">
+<path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" d="M12 21s6.5-5.8 6.5-11.2A6.5 6.5 0 0 0 5.5 9.8C5.5 15.2 12 21 12 21Z"/>
+  <path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" d="m9.3 10.5 1.8 1.8 3.8-4"/>
+  </symbol>
+  <symbol id="tm-cloud-sync" viewBox="0 0 24 24">
+<path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" d="M8.2 18.5H7a4 4 0 0 1-.4-8 5.9 5.9 0 0 1 11.1 1.8H18a3.1 3.1 0 0 1 0 6.2h-2"/>
+  <path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" d="M10 16.1h4M12 14.1v4"/>
+  </symbol>
+  <symbol id="tm-diagnostics" viewBox="0 0 24 24">
+<path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" d="M5 12.5h3l1.7-5 3.2 9 2.1-4h4"/>
+  <path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" d="M19.3 8.2A7.8 7.8 0 1 0 20 12"/>
+  <path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" d="M16.5 5.6 19.2 8l2.3-2.7"/>
+  </symbol>
+  <symbol id="tm-edit" viewBox="0 0 24 24">
+<path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5h4.2l9.3-9.3a2.1 2.1 0 1 0-3-3L5.7 16.5l-1.2 3Z"/>
+  <path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" d="m13.8 6.3 3.9 3.9"/>
+  </symbol>
+  <symbol id="tm-gallery" viewBox="0 0 24 24">
+<rect x="4.5" y="5" width="15" height="14" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="9" cy="9.5" r="1.3" fill="currentColor"/>
+  <path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" d="m5.5 16 4-4 3.1 3.1 2.1-2.1 3.8 3.9"/>
+  </symbol>
+  <symbol id="tm-group" viewBox="0 0 24 24">
+<circle cx="9" cy="9" r="2.8" fill="none" stroke="currentColor" stroke-width="1.9"/>
+  <path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" d="M4.5 18a5.4 5.4 0 0 1 9 0"/>
+  <circle cx="16.8" cy="9.5" r="2.1" fill="none" stroke="currentColor" stroke-width="1.9" opacity=".82"/>
+  <path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" d="M14.1 17.7a4.5 4.5 0 0 1 5.2-.3" opacity=".82"/>
+  </symbol>
+  <symbol id="tm-hidden" viewBox="0 0 24 24">
+<path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" d="M3.2 3.2 20.8 20.8"/>
+  <path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" d="M9.6 5.4A10.6 10.6 0 0 1 12 5.1c5.7 0 9.2 5.3 9.2 5.3a16.5 16.5 0 0 1-3.6 3.8"/>
+  <path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" d="M14.4 18.6c-.8.2-1.6.3-2.4.3-5.7 0-9.2-5.3-9.2-5.3a16.8 16.8 0 0 1 4.7-4.4"/>
+  <path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" d="M10.2 10.2a2.7 2.7 0 0 0 3.6 3.6"/>
+  </symbol>
+  <symbol id="tm-home" viewBox="0 0 24 24">
+<path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" d="M3.5 10.8 12 4l8.5 6.8"/>
+  <path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" d="M5.5 9.8V20h13V9.8"/>
+  <path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" d="M9.2 20v-5.6h5.6V20"/>
+  <path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" d="M15.8 6.9v-2h2.7v4.2"/>
+  </symbol>
+  <symbol id="tm-import-json" viewBox="0 0 24 24">
+<path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" d="M6.5 4.5h7.8L18.5 8v11.5h-12z"/>
+  <path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" d="M14.2 4.7V8h3.7"/>
+  <path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" d="M12 17v-6"/>
+  <path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" d="m9.6 13.6 2.4-2.6 2.4 2.6"/>
+  <path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" d="M8.7 8.7h2.4" opacity=".72"/>
+  </symbol>
+  <symbol id="tm-location" viewBox="0 0 24 24">
+<path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" d="M12 21s6-6.1 6-11A6 6 0 0 0 6 10c0 4.9 6 11 6 11Z"/>
+  <circle cx="12" cy="10" r="2.2" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <symbol id="tm-logout" viewBox="0 0 24 24">
+<path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" d="M10.2 5.2H6.8A2.8 2.8 0 0 0 4 8v8a2.8 2.8 0 0 0 2.8 2.8h3.4"/>
+  <path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" d="M13 12h7M17 8l4 4-4 4"/>
+  </symbol>
+  <symbol id="tm-map" viewBox="0 0 24 24">
+<path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" d="M4.5 6.2 9.5 4l5 2.2 5-2.2v13.8l-5 2.2-5-2.2-5 2.2Z"/>
+  <path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" d="M9.5 4v13.8M14.5 6.2V20"/>
+  </symbol>
+  <symbol id="tm-memo" viewBox="0 0 24 24">
+<path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" d="M6.5 4.5h8.3L18.5 8v11.5h-12z"/>
+  <path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" d="M14.5 4.7V8h3.6"/>
+  <path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" d="M9 11h6.2M9 14.5h6.2M9 18h4.4"/>
+  </symbol>
+  <symbol id="tm-mood" viewBox="0 0 24 24">
+<circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+  <path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" d="M8.8 10h.1M15.1 10h.1M8.8 14.2c1 1.2 2 1.8 3.2 1.8s2.2-.6 3.2-1.8"/>
+  </symbol>
+  <symbol id="tm-photo" viewBox="0 0 24 24">
+<rect x="3.5" y="5.5" width="17" height="13" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.9"/>
+  <path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" d="m6.5 16 3.2-3.6 2.8 2.8 2.4-2.2 2.6 3"/>
+  <circle cx="9" cy="9.5" r="1.4" fill="currentColor"/>
+  </symbol>
+  <symbol id="tm-plane" viewBox="0 0 24 24">
+<path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" d="M3.8 12.5 21 4.5l-6.2 15-3.1-6.2-7.9-.8Z"/>
+  <path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" d="M21 4.5 11.7 13.3"/>
+  </symbol>
+  <symbol id="tm-queue" viewBox="0 0 24 24">
+<path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" d="M7 6h12M7 12h12M7 18h12"/>
+  <circle cx="4.5" cy="6" r="1.3" fill="currentColor"/>
+  <circle cx="4.5" cy="12" r="1.3" fill="currentColor" opacity=".75"/>
+  <circle cx="4.5" cy="18" r="1.3" fill="currentColor" opacity=".55"/>
+  </symbol>
+  <symbol id="tm-rating" viewBox="0 0 24 24">
+<path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" d="m12 3.5 2.3 4.7 5.2.8-3.8 3.7.9 5.2L12 15.4l-4.6 2.5.9-5.2L4.5 9l5.2-.8Z"/>
+  </symbol>
+  <symbol id="tm-read" viewBox="0 0 24 24">
+<path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" d="M5 5.8A2.8 2.8 0 0 1 7.8 3H12v16H7.8A2.8 2.8 0 0 0 5 21V5.8Zm14 0A2.8 2.8 0 0 0 16.2 3H12v16h4.2A2.8 2.8 0 0 1 19 21V5.8Z"/>
+  <path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" d="M8 7h2.8M14 7h2.4" opacity=".7"/>
+  </symbol>
+  <symbol id="tm-route" viewBox="0 0 24 24">
+<circle cx="6.2" cy="17.8" r="1.8" fill="currentColor"/>
+  <circle cx="17.8" cy="6.2" r="1.8" fill="currentColor" opacity=".82"/>
+  <path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" d="M7.8 16.8c1.8-3.6 4.3-6.1 8-8"/>
+  <path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" d="m13.8 8 4-3.2-3.2 4"/>
+  </symbol>
+  <symbol id="tm-settings" viewBox="0 0 24 24">
+<path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" d="M12 8.3a3.7 3.7 0 1 0 0 7.4 3.7 3.7 0 0 0 0-7.4Z"/>
+  <path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" d="M19.1 13.4c.1-.5.1-.9.1-1.4s0-.9-.1-1.4l2-1.5-2-3.5-2.5 1a8 8 0 0 0-2.3-1.3L14 2.7h-4l-.4 2.6a8 8 0 0 0-2.3 1.3l-2.5-1-2 3.5 2 1.5c-.1.5-.1.9-.1 1.4s0 .9.1 1.4l-2 1.5 2 3.5 2.5-1a8 8 0 0 0 2.3 1.3l.4 2.6h4l.4-2.6a8 8 0 0 0 2.3-1.3l2.5 1 2-3.5-2.1-1.5Z"/>
+  </symbol>
+  <symbol id="tm-storage" viewBox="0 0 24 24">
+<ellipse cx="12" cy="6.5" rx="7" ry="3.2" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+  <path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" d="M5 6.5v5c0 1.8 3.1 3.2 7 3.2s7-1.4 7-3.2v-5"/>
+  <path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" d="M5 11.5v5c0 1.8 3.1 3.2 7 3.2s7-1.4 7-3.2v-5"/>
+  </symbol>
+  <symbol id="tm-sync" viewBox="0 0 24 24">
+<path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" d="M7.2 8.2a6.2 6.2 0 0 1 9.7-1.4L19 8.8"/>
+  <path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" d="M19.2 5.5v3.4h-3.4"/>
+  <path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" d="M16.8 15.8a6.2 6.2 0 0 1-9.7 1.4L5 15.2"/>
+  <path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" d="M4.8 18.5v-3.4h3.4"/>
+  </symbol>
+  <symbol id="tm-tag" viewBox="0 0 24 24">
+<path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.2V5.5h6.7l8.3 8.3a2.3 2.3 0 0 1 0 3.2L17 19.5a2.3 2.3 0 0 1-3.2 0Z"/>
+  <circle cx="8.4" cy="8.4" r="1.1" fill="currentColor"/>
+  </symbol>
+  <symbol id="tm-timeline" viewBox="0 0 24 24">
+<path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" d="M12 4v16"/>
+  <circle cx="12" cy="6" r="2.1" fill="currentColor"/>
+  <circle cx="12" cy="12" r="2.1" fill="currentColor" opacity=".78"/>
+  <circle cx="12" cy="18" r="2.1" fill="currentColor" opacity=".56"/>
+  <path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" d="M14.5 6h4M5.5 12H9.5M14.5 18h4"/>
+  </symbol>
+  <symbol id="tm-trash" viewBox="0 0 24 24">
+<path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" d="M4.8 6.8h14.4"/>
+  <path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" d="M8.2 6.8V5.4A1.9 1.9 0 0 1 10.1 3.5h3.8a1.9 1.9 0 0 1 1.9 1.9v1.4"/>
+  <path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" d="M6.5 6.8l.9 12a2 2 0 0 0 2 1.9h5.2a2 2 0 0 0 2-1.9l.9-12M10 10.2v6.2M14 10.2v6.2"/>
+  </symbol>
+  <symbol id="tm-trips" viewBox="0 0 24 24">
+<path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" d="M6.5 7.5h11A2.5 2.5 0 0 1 20 10v8.5A2.5 2.5 0 0 1 17.5 21h-11A2.5 2.5 0 0 1 4 18.5V10a2.5 2.5 0 0 1 2.5-2.5Z"/>
+  <path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" d="M9 7.5V5.8A2.8 2.8 0 0 1 11.8 3h.4A2.8 2.8 0 0 1 15 5.8v1.7"/>
+  <path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" d="M4 12h16M8 12v2.2M16 12v2.2"/>
+  </symbol>
+  <symbol id="tm-user" viewBox="0 0 24 24">
+<circle cx="12" cy="8" r="3.3" fill="none" stroke="currentColor" stroke-width="1.9"/>
+  <path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" d="M5 19.5a7.7 7.7 0 0 1 14 0"/>
+  </symbol>
+  <symbol id="tm-view" viewBox="0 0 24 24">
+<path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" d="M2.8 12s3.5-5.3 9.2-5.3 9.2 5.3 9.2 5.3-3.5 5.3-9.2 5.3S2.8 12 2.8 12Z"/>
+  <circle cx="12" cy="12" r="2.8" fill="none" stroke="currentColor" stroke-width="1.9"/>
+  </symbol>
+</svg>

@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Reset Travel Memo Cache</title>
+  <style>
+    body{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;min-height:100vh;margin:0;display:grid;place-items:center;background:linear-gradient(135deg,#ecfeff,#fff7ed);color:#0f172a;padding:24px}
+    main{max-width:520px;background:rgba(255,255,255,.9);border:1px solid rgba(15,23,42,.08);border-radius:28px;padding:28px;box-shadow:0 24px 80px rgba(15,23,42,.14);text-align:center}
+    h1{margin:0 0 8px;font-size:28px}p{color:#475569;line-height:1.6}button{border:0;border-radius:20px;padding:14px 18px;background:#0f766e;color:#fff;font-weight:900;cursor:pointer}
+  </style>
+</head>
+<body>
+  <main>
+    <h1>กำลังล้าง Cache แอป</h1>
+    <p id="status">Travel Memo จะล้าง Service Worker และ Cache เก่า แล้วกลับหน้าแรกอัตโนมัติ</p>
+    <button id="retry" hidden>ลองอีกครั้ง</button>
+  </main>
+  <script>
+    async function resetCache(){
+      const status = document.getElementById('status');
+      try {
+        status.textContent = 'กำลังล้าง Service Worker...';
+        if ('serviceWorker' in navigator) {
+          const registrations = await navigator.serviceWorker.getRegistrations();
+          await Promise.all(registrations.map((registration) => registration.unregister()));
+        }
+        status.textContent = 'กำลังล้าง Cache...';
+        if ('caches' in window) {
+          const keys = await caches.keys();
+          await Promise.all(keys.filter((key) => key.startsWith('travel-memo')).map((key) => caches.delete(key)));
+        }
+        try {
+          localStorage.removeItem('travel_memo_sw_version');
+          localStorage.removeItem('travel_memo_boot_version');
+          sessionStorage.removeItem('travel_memo_reloaded_for_sw_done');
+        } catch (_) {}
+        status.textContent = 'เรียบร้อย กำลังโหลด Travel Memo ใหม่...';
+        location.replace('/?cache_bust=' + Date.now() + '&v=2.8.7');
+      } catch (error) {
+        status.textContent = error.message || 'ล้าง Cache ไม่สำเร็จ';
+        document.getElementById('retry').hidden = false;
+      }
+    }
+    document.getElementById('retry').addEventListener('click', resetCache);
+    resetCache();
+  </script>
+</body>
+</html>
